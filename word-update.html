@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>word文件上传</title>
+    <link rel="stylesheet" href="themes/default/css/ueditor.css" type="text/css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ueditor.all.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lang/zh-cn/zh-cn.js"></script>
+</head>
+<body>
+
+<p class="note" style="padding:0 20px">
+    <span class="remind">注：线上演示版上传功能只作为功能演示</span>
+    <span id="uploadbtn" class="uploadbtn">导入word文档</span>
+    <span class="uploadcount"></span>
+    <span class="clearfix"></span>
+</p>
+
+<div class="details" style="padding:0 20px">
+    <div>
+        <script type="text/plain" id="editor"></script>
+        <div class="con-split"></div>
+    </div>
+</div>
+
+
+<script src="third-party/webuploader/webuploader.flashonly.js"></script>
+<link href="third-party/webuploader/webuploader.css"/>
+<script>
+    var ue = UE.getEditor("editor" ,{
+      toolbars: [
+        ['fullscreen', 'source', '|', 'undo', 'redo', '|', 'fontsize', '|', 'blockquote', 'horizontal', '|', 'removeformat', 'formatmatch', 'link', 'unlink'],
+        ['bold', 'italic', 'underline', 'forecolor', 'backcolor', '|', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|'
+        ,'rowspacingtop', 'rowspacingbottom', 'lineheight', '|', 'insertorderedlist', 'insertunorderedlist', '|'
+        ,'imagenone', 'imageleft', 'imageright', 'imagecenter'],
+        ['fontfamily', 'letterspacing', '|','fontborder','strikethrough', 'superscript', 'subscript', 'autotypeset', 'pasteplain', '|',
+          'insertimage', 'emotion', 'map', '|', 'inserttable', 'searchreplace']
+       ],
+      elementPathEnabled:false,
+      wordCount:false,
+      initialFrameWidth: 900,
+      initialFrameHeight: 500,
+      autoHeightEnabled:false,
+      saveInterval:500,
+      catchRemoteImageEnable:false,		// 防止远程抓取图片
+      enterTag:'p'						// 去掉自动添加的p和br标签
+    });
+
+
+    (function(){
+
+        function renderUploader(id, ue) {
+
+            var uploader = WebUploader.create({
+                swf: 'third-party/webuploader/Uploader.swf',
+                server: 'http://convert.wenku.baidu.com/rtcs/convert?pn=1&rn=-1',
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: "#" + id,
+                // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+                resize: false
+            });
+
+            uploader.on('filesQueued', function(files){
+                uploader.upload();
+                uploader.disable();
+            });
+
+            uploader.on('uploadFinished', function(files){
+                setTimeout(function () {
+                    uploader.enable();
+                },2000);
+            });
+
+            uploader.on('all', function(){
+                var args = UE.utils.clone([], arguments);
+                args[0] = 'uploader_' + args[0];
+                console.log(args[0]);
+                return ue.fireEvent.apply(ue, args);
+            });
+
+
+        }
+        renderUploader('uploadbtn', ue);
+
+    })();
+</script>
+
+
+</body>
+</html>

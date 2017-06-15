@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+    .xheDialog {
+        font-family: monospace;
+        font-size: 12px;
+    }
+    .xheDialog div {
+        padding: 2px 0;
+    }
+    .xheDialog input {
+        border-color: #AFB8C0;
+        border-style: solid;
+        border-width: 1px;
+        font-size: 12px;
+        margin: 0;
+    }
+    .wrapper {
+        font-size: 12px;
+        margin-left: 2px;
+    }
+    .base {
+        border: 1px solid #DDDDDD;
+        height: 70px;
+        margin-left: 10px;
+        margin-top: 10px;
+        width: 472px;
+    }
+    .base table {
+        margin-left: 10px;
+    }
+    .base table tr {
+        height: 25px;
+    }
+    .extend {
+        border: 1px solid #DDDDDD;
+        float: left;
+        height: 160px;
+        margin: 10px;
+        width: 300px;
+    }
+    .extend table {
+        height: 135px;
+    }
+    #preview {
+        background-color: #EEEEEE;
+        border: 1px solid #CCCCCC;
+        float: left;
+        height: 155px;
+        margin: 16px 0;
+        width: 160px;
+    }
+    #preview table {
+        margin: 3px 5px;
+    }
+    #preview table td {
+        height: 20px;
+        width: 30px;
+    }
+    #message {
+        color: red;
+        float: left;
+        font-size: 10px;
+        line-height: 15px;
+        margin-left: 10px;
+        width: 180px;
+    }
+    #messageContent {
+        color: green;
+        margin-top: 5px;
+    }
+    #bgColor {
+        width: 85px;
+    }
+    .extend select {
+        width: 90px;
+    }
+    .xheModalShadow {
+        background: none repeat scroll 0 0 #000000;
+        left: 50%;
+        opacity: 0.2;
+        position: fixed;
+        top: 50%;
+        z-index: 1000009;
+    }
+    .xheModalOverlay {
+        background-color: #000000;
+        height: 100%;
+        left: 0;
+        opacity: 0.2;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000008;
+    }
+    .xheModal {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #BBBBBB;
+        font-size: 12px;
+        left: 50%;
+        position: fixed;
+        text-align: left;
+        top: 50%;
+        z-index: 1000010;
+    }
+    .xheModalTitle {
+        background: none repeat scroll 0 0 #F0F0EE;
+        border-bottom: 1px solid #BBBBBB;
+        padding: 5px;
+    }
+    #pasteImageTipsDiv {
+        background: none repeat scroll 0 0 #FFF6D0;
+        border: 1px solid #F4E190;
+        border-radius: 3px 3px 3px 3px;
+        box-shadow: 2px 2px 5px #DAD4AB;
+        font-family: Verdana,Arial,sans-serif;
+        font-size: 12px;
+        height: 20px;
+        line-height: 20px;
+        padding-left: 10px;
+        padding-right: 5px;
+        position: absolute;
+        width: auto;
+        z-index: 200;
+    }
+    .closeTipsDiv {
+        border-radius: 3px 3px 3px 3px;
+        cursor: pointer;
+        float: right;
+        height: 18px;
+        margin-left: 10px;
+        position: relative;
+        text-align: center;
+        width: 20px;
+    }
+    .bodyDisable {
+        background: none repeat scroll 0 0 #FFFFFF;
+        height: 100%;
+        left: 0;
+        opacity: 0.6;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1114;
+    }
+    .bodyProgressWrap {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1115;
+    }
+    .progressCenter {
+        height: 50%;
+        width: 100%;
+    }
+    .progressIngBody {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #6C92AD;
+        height: 85px;
+        margin: 0 auto;
+        width: 300px;
+    }
+    .progressIngBody .progressIngTitle {
+        font-size: 14px;
+        font-weight: 600;
+        height: 20px;
+        margin: 10px auto;
+        overflow: hidden;
+        text-align: center;
+        text-indent: 22px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 300px;
+        word-break: keep-all;
+    }
+    .progressIngBody .progressIngMission {
+        float: left;
+        height: 20px;
+        margin-top: -5px;
+    }
+    .progressIngBody .mission {
+        border: 1px solid #CCCCCC;
+        float: left;
+        height: 19px;
+        margin: 10px 8px 0 18px;
+        padding: 1px;
+        width: 225px;
+    }
+    .progressIngBody .progressError {
+        background-position: 0 -9px;
+        color: #FF0000;
+    }
+    .progressIngBody .progressNum {
+        float: left;
+        width: 30px;
+    }
+    .progressIngBody .progressInfo {
+        float: right;
+        margin: -7px 16px 0 10px;
+    }
+    .progressIngBody .progressFileSize {
+        color: #7D7D7D;
+        float: left;
+    }
+    .progressIngBody .progressCancel {
+        cursor: pointer;
+        float: right;
+    }
+    .tool4edit-container {
+        height: 20px;
+    }
+    .tool4edit-body {
+        background: none repeat scroll 0 0 white;
+        border: 1px solid #AABBCC;
+        height: 18px;
+        list-style: none outside none;
+        margin: -8px -6px;
+        padding: 0;
+        width: 36px;
+    }
+    .tool4edit-body ul {
+        background: none repeat scroll 0 0 white;
+        border: 1px solid #AABBCC;
+        list-style: none outside none;
+        margin: 0;
+        padding: 0;
+    }
+    .tool4edit-body li {
+        float: left;
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+    ul.tool4edit-panel {
+        border: 1px solid #AABBCC;
+        left: -1px;
+        padding: 3px;
+        position: absolute;
+        top: 18px;
+        width: 225px;
+    }
+    .tool4edit-panel input.tool4edit-width {
+        width: 35px;
+    }
+    .tool4edit-panel input.tool4edit-height {
+        width: 35px;
+    }
+    .tool4edit-panel input.tool4edit-submit {
+        margin-left: 10px;
+        width: auto;
+    }
+    .xheDialogType {
+        font-size: 12px;
+    }
+    .xheDialogType .header {
+        background: none repeat scroll 0 0 #D0D0D0;
+        border: 1px solid #A8ACB1;
+        border-radius: 6px 6px 6px 6px;
+        height: 23px;
+    }
+    .xheDialogType .header .qqheader {
+        -moz-border-bottom-colors: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        border-color: #7C7874 #7C7874 black;
+        border-image: none;
+        border-style: solid;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-width: 1px 1px 0;
+        cursor: pointer;
+        float: left;
+        height: 18px;
+        line-height: 16px;
+        margin-left: 3px;
+        margin-top: 5px;
+        text-align: center;
+        width: 40px;
+    }
+    .xheDialogType .header .msnheader {
+        -moz-border-bottom-colors: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        border-color: #7C7874 #7C7874 black;
+        border-image: none;
+        border-style: solid;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-width: 1px 1px 0;
+        cursor: pointer;
+        float: left;
+        height: 18px;
+        line-height: 16px;
+        margin-left: 3px;
+        margin-top: 5px;
+        text-align: center;
+        width: 40px;
+    }
+    .xheDialogType .header .skypeheader {
+        -moz-border-bottom-colors: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        border-color: #7C7874 #7C7874 black;
+        border-image: none;
+        border-style: solid;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-width: 1px 1px 0;
+        cursor: pointer;
+        float: left;
+        height: 18px;
+        line-height: 16px;
+        margin-left: 3px;
+        margin-top: 5px;
+        text-align: center;
+        width: 40px;
+    }
+    .xheDialogType .header .aliwangwangheader {
+        -moz-border-bottom-colors: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        border-color: #7C7874 #7C7874 black;
+        border-image: none;
+        border-style: solid;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-width: 1px 1px 0;
+        cursor: pointer;
+        float: left;
+        height: 18px;
+        line-height: 16px;
+        margin-left: 3px;
+        margin-top: 5px;
+        text-align: center;
+        width: 60px;
+    }
+    .xheDialogType .header .taobaowangwangheader {
+        -moz-border-bottom-colors: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        border-color: #7C7874 #7C7874 black;
+        border-image: none;
+        border-style: solid;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-width: 1px 1px 0;
+        cursor: pointer;
+        float: left;
+        height: 18px;
+        line-height: 16px;
+        margin-left: 3px;
+        margin-top: 5px;
+        text-align: center;
+        width: 60px;
+    }
+    #xheDialogQQ {
+        font-size: 12px;
+        margin: 6px 4px;
+        text-align: left;
+        width: 280px;
+    }
+    .div_o{
+        background: none repeat scroll 0 0 #FFFFFF;
+    }
+    </style>
+    <script type="text/javascript" src="http://www.jihui88.com/js/jquery.js"></script>
+    <script type="text/javascript">
+        function qqkf(){
+            var qq_number = $("#xheQQ").val();
+            var qq_name= $("#xheName").val();
+
+            var qq_item = $("input[name='displayStyle'][type='radio']:checked").val();
+            var qq_state =	$("input[name='showQQstate'][type='radio']:checked").val();
+            if(qq_number==''){
+                alert('请输入QQ号码');
+                return false;
+            }else{
+                if(isNaN(qq_number)){
+                    alert("对不起，您输入的QQ号码格式错误");
+                    return false;
+                }
+            }
+
+            var qq0=' <a qqstylevlaue="'+qq_item+'" qqstatevalue="'+qq_state+'" qqnumber="'+qq_number+'" href="http://wpa.qq.com/msgrd?v=3&amp;uin='+qq_number+'&amp;site=qq&amp;menu=yes" target="_blank" style="text-decoration:none;">'+
+                    '<img _hidetool="true" style="text-decoration:none;cursor:pointer;vertical-align:middle;" qqnumber="'+qq_number+'" src="vendor/ueditor1_4_3/third-party/qqstateimg/qq'+qq_item+'.gif" border="0" /> '+qq_name+'</a>';
+            var qq1 = '<a qqstylevlaue="'+qq_item+'" qqstatevalue="'+qq_state+'" qqname="'+qq_name+'" qqnumber="'+qq_number+'" href="http://wpa.qq.com/msgrd?v=3&amp;uin='+qq_number+'&amp;site=qq&amp;menu=yes" target="_blank" style="text-decoration:none;">'+
+                    '<img _hidetool="true" style="text-decoration:none;cursor:pointer;vertical-align:middle;" qqname="'+qq_name+'" qqnumber="'+qq_number+'" src="http://wpa.qq.com/pa?p=1:'+qq_number+':45" alt="'+qq_number+'" border="0" /> '+qq_name+'</a>';
+            if(qq_state=='0')
+                callback(qq0);
+            else
+                callback(qq1);
+        }
+        function msn_click(){
+            var msn_id=$('#xheMSN').val();
+            var msn_name = $("#xheNameMSN").val();
+            if(msn_id==''){
+                alert('msn账号不能为空!')
+                return false;
+            }
+            var reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            if(!reg.test(msn_id)){
+                alert("MSN格式错误");
+                return false;
+            }
+            var msn = '<a msnnumber="'+msn_id+'" msnname="'+msn_name+'" href="msnim:chat?contact='+msn_id+'"><img _hidetool="true" style="vertical-align:middle;" src="../qqstateimg/msn.gif" border="0" />'+msn_name+'</a>';
+            callback(msn);
+        }
+        function skype_click(){
+            var skype_id=$("#xheSkype").val();
+            var skype_name=$("#xheNameSkype").val();
+            if(skype_id==''){
+                alert('skype账号不能为空')
+                return false;
+            }
+            var skype = '<a skynumber="'+skype_id+'" skyname="'+skype_name+'" href="skype:'+skype_id+'?call"><img _hidetool="true" src="../qqstateimg/skype2.png" style="border:none;vertical-align:middle;" height="21" width="22" />'+skype_name+'</a>';
+            callback(skype);
+        }
+        function ali_click(){
+            var ali_id = $("#xheAliWangWang").val();
+            var ali_name = $("#xheNameAliWangWang").val();
+            var ali_state =	$("input[name='showAliWangWangstate'][type='radio']:checked").val();
+            if(ali_id==''){
+                alert('账号不能为空')
+                return false;
+            }
+            var ali0 = '<a target="_blank" aliwangwangstatevalue="'+ali_state+'" aliwangwang="'+ali_id+'" aliwangwangname="'+ali_name+'" href="http://amos.alicdn.com/msg.aw?v=2&amp;uid='+ali_id+'&amp;site=cnalichn&amp;s=10&amp;charset=UTF-8"><img _hidetool="true" style="vertical-align:middle;" src="vendor/ueditor1_4_3/third-party/qqstateimg/online.gif" alt="'+ali_name+'" border="0" />'+ali_name+'</a>';
+            var ali1 = '<a target="_blank" aliwangwangstatevalue="'+ali_state+'" aliwangwang="'+ali_id+'" aliwangwangname="'+ali_name+'" href="http://amos.alicdn.com/msg.aw?v=2&amp;uid='+ali_id+'&amp;site=cnalichn&amp;s=10&amp;charset=UTF-8"><img _hidetool="true" style="vertical-align:middle;" src="http://amos.alicdn.com/online.aw?v=2&amp;uid='+ali_id+'&amp;site=cnalichn&amp;s=11&amp;charset=UTF-8" alt="'+ali_name+'" border="0" /><span>'+ali_name+'</span></a> ';
+            if(ali_state=='0')
+                callback(ali0);
+            else
+                callback(ali1);
+        }
+        function taobao_click(){
+            var taobao_id = $("#xheTaoBaoWangWang").val();
+            var taobao_name = $("#xheNameTaoBaoWangWang").val();
+            var taobao_state =	$("input[name='showTaoBaoWangWangstate'][type='radio']:checked").val();
+            if(taobao_id==''){
+                alert('账号不能为空')
+                return false;
+            }
+            var taobao0 ='<a target="_blank" taobaowangwangstatevalue="'+taobao_state+'" taobaowangwang="'+taobao_id+'" taobaowangwangname="'+taobao_name+'" href="http://www.taobao.com/webww/ww.php?ver=3&amp;touid='+taobao_id+'&amp;siteid=cntaobao&amp;status=2&amp;charset=utf-8"><img _hidetool="true" style="vertical-align:middle;" src="vendor/ueditor1_4_3/third-party/qqstateimg/online.gif" alt="'+taobao_name+'" border="0" /><span>'+taobao_name+'</span></a>';
+            var taobao1 = '<a target="_blank" taobaowangwangstatevalue="'+taobao_state+'" taobaowangwang="'+taobao_id+'" taobaowangwangname="'+taobao_name+'" href="http://www.taobao.com/webww/ww.php?ver=3&amp;touid='+taobao_id+'&amp;siteid=cntaobao&amp;status=2&amp;charset=utf-8"><img _hidetool="true" style="vertical-align:middle;" src="http://amos.alicdn.com/online.aw?v=2&amp;uid='+taobao_id+'&amp;site=cntaobao&amp;s=2&amp;charset=UTF-8" alt="'+taobao_name+'" border="0" />'+taobao_name+'</a>';
+            if(taobao_state=='0')
+                callback(taobao0);
+            else
+                callback(taobao1);
+        }
+        function to_(obj){
+            $(".div_frame").hide();
+            $("#xheDialog"+$(obj).attr("id").replace("faiscoTypeOf","")).show();
+            $(".div_o").removeClass("div_o");
+            $(obj).addClass("div_o");
+        }
+        function q_click(obj){
+            to_(obj);
+        }
+        function m_click(obj){
+            to_(obj);
+        }
+        function s_click(obj){
+            to_(obj);
+        }
+        function a_click(obj){
+            to_(obj);
+        }
+        function t_click(obj){
+            to_(obj);
+        }
+    </script>
+</head>
+<body>
+<div class="edui-popup-content" id="edui84_content">
+<div class="xheDialogType">
+    <div class="header">
+        <div name="faiscoServicesType" onclick="q_click(this);" id="faiscoTypeOfQQ" class="qqheader faiscoServicesType div_o">QQ</div>
+        <div name="faiscoServicesType" onclick="m_click(this);" id="faiscoTypeOfMSN"
+             class="msnheader faiscoServicesType">MSN</div>
+        <div name="faiscoServicesType" onclick="s_click(this);" id="faiscoTypeOfSkype"
+             class="skypeheader faiscoServicesType">Skype</div>
+        <div name="faiscoServicesType" onclick="a_click(this);" id="faiscoTypeOfAliWangWang"
+             class="aliwangwangheader faiscoServicesType">阿里旺旺</div>
+        <div name="faiscoServicesType" onclick="t_click(this);" id="faiscoTypeOfTaoBaoWangWang"
+             class="taobaowangwangheader faiscoServicesType">淘宝旺旺</div>
+    </div>
+</div>
+<div id="xheDialogQQ" class="div_frame">
+    <div style="">
+        <div
+                style="clear: both; float: left; width: 60px; line-height: 23px; text-align: right;">QQ号码：</div>
+        <div style="float: left;">
+            <input type="text" class="xheText" value="" id="xheQQ">
+        </div>
+    </div>
+    <div style="clear: both;">
+        <div style="float: left; width: 60px; text-align: right;">显示名称：</div>
+        <div style="float: left;">
+            <input type="text" class="xheText" value="" id="xheName">
+        </div>
+    </div>
+    <div style="clear: both;">
+        <div
+                style="float: left; width: 60px; line-height: 23px; text-align: right;">风格：</div>
+        <div style="float: left; width: 100px;">
+            <input type="radio" value="45" id="displayStyle45"
+                   name="displayStyle" style="border: none;" checked="checked"><span
+                onclick="$('#displayStyle45')[0].click()" style="cursor: default;"><img
+                border="0"
+                src="vendor/ueditor1_4_3/third-party/qqstateimg/qq45.gif"></span>
+        </div>
+        <div style="float: left; width: 100px;">
+            <input type="radio" value="4" id="displayStyle4"
+                   name="displayStyle" style="border: none;"><span
+                onclick="$('#displayStyle4')[0].click()" style="cursor: default;"><img
+                border="0"
+                src="vendor/ueditor1_4_3/third-party/qqstateimg/qq4.gif"></span>
+        </div>
+    </div>
+    <div style="clear: both;">
+        <div
+                style="float: left; width: 60px; line-height: 23px; text-align: right;">&nbsp;</div>
+        <div style="float: left; width: 100px;">
+            <input type="radio" value="1" id="displayStyle1"
+                   name="displayStyle" style="border: none;"><span
+                onclick="$('#displayStyle1')[0].click()" style="cursor: default;"><img
+                border="0"
+                src="vendor/ueditor1_4_3/third-party/qqstateimg/qq1.gif"></span>
+        </div>
+        <div style="float: left; width: 110px;">
+            <input type="radio" value="3" id="displayStyle3"
+                   name="displayStyle" style="border: none;"><span
+                onclick="$('#displayStyle3')[0].click()" style="cursor: default;"><img
+                border="0"
+                src="vendor/ueditor1_4_3/third-party/qqstateimg/qq3.gif"></span>
+        </div>
+    </div>
+    <div style="clear: both;">
+        <div style="float: left; width: 60px; text-align: right;">&nbsp;</div>
+        <div style="float: left; width: 100px;">
+            <input type="radio" id="displayStyle7" value="7"
+                   name="displayStyle" style="border: none;"><span
+                onclick="$('#displayStyle7')[0].click()" style="cursor: default;"><img
+                border="0"
+                src="vendor/ueditor1_4_3/third-party/qqstateimg/qq7.gif"></span>
+        </div>
+        <div style="float: left; width: 100px;">
+            <input type="radio" id="displayStyle6" value="6"
+                   name="displayStyle" style="border: none;"><span
+                onclick="$('#displayStyle6')[0].click()" style="cursor: default;"><img
+                border="0"
+                src="vendor/ueditor1_4_3/third-party/qqstateimg/qq6.gif"></span>
+        </div>
+    </div>
+    <div style="clear: both;">
+        <div style="float: left; width: 60px; text-align: right;">&nbsp;</div>
+        <div style="float: left; width: 100px;">
+            <input type="radio" id="displayStyle10" value="10"
+                   name="displayStyle" style="border: none;"><span
+                onclick="$('#displayStyle10')[0].click()" style="cursor: default;"><img
+                border="0"
+                src="vendor/ueditor1_4_3/third-party/qqstateimg/qq10.gif"></span>
+        </div>
+        <div style="float: left; width: 100px;">
+            <input type="radio" id="displayStyle5" value="5"
+                   name="displayStyle" style="border: none;"><span
+                onclick="$('#displayStyle5')[0].click()" style="cursor: default;"><img
+                border="0"
+                src="vendor/ueditor1_4_3/third-party/qqstateimg/qq5.gif"></span>
+        </div>
+    </div>
+    <div style="clear: both;">
+        <div
+                style="float: left; width: 60px; line-height: 23px; text-align: right;">QQ状态：</div>
+        <div style="float: left; width: 100px;">
+            <input type="radio" value="0" id="showQQstate0" name="showQQstate"
+                   style="border: none;" checked="checked"><span
+                onclick="$('#showQQstate0')[0].click()" style="cursor: default;">一直在线</span>
+        </div>
+        <div style="float: left; width: 100px;">
+            <input type="radio" value="1" id="showQQstate1" name="showQQstate"
+                   style="border: none;"><span
+                onclick="$('#showQQstate1')[0].click()" style="cursor: default;">实时</span>
+        </div>
+    </div>
+    <div style="text-align: right; clear: both;">
+        <div style="float: left; height: 30px; padding: 10px 5px 0px 0px;">
+            <a style="color: red;" target="_blank"
+               href="http://wp.qq.com/index.html">开通QQ在线客服</a>
+        </div>
+        <button
+                style="margin-top: 22px; *line-height: 16px; cursor: pointer;" onclick="qqkf();" class="qq_click">确定</button>
+        <button style="*line-height: 16px; cursor: pointer;">取消</button>
+    </div>
+</div>
+<div
+        style="display: none; width: 280px; margin-top: 15px; height: 220px;"
+        id="xheDialogMSN"  class="div_frame">
+    <div class="xheDialog">
+        <div style="float: left; width: 60px; text-align: right;">MSN账号：</div>
+        <div style="float: left;">
+            <input type="text" class="xheText" style="width: 170px;" value=""
+                   id="xheMSN">
+        </div>
+        <div style="float: left; width: 60px; text-align: right;">显示名称：</div>
+        <div style="float: left;">
+            <input type="text" class="xheText" value="" style="width: 170px;"
+                   id="xheNameMSN">
+        </div>
+        <div style="float: right; margin-top: 20px; *width: 90px;">
+            <button style="cursor: pointer;" onclick="msn_click();" class="msn_click">确定</button>
+            <button style="cursor: pointer;">取消</button>
+        </div>
+    </div>
+</div>
+<div
+        style="display: none; width: 280px; margin-top: 15px; height: 220px;"
+        id="xheDialogSkype"  class="div_frame">
+    <div class="xheDialog">
+        <div style="float: left; width: 80px; text-align: right;">Skype账号：</div>
+        <div style="float: left;">
+            <input type="text" class="xheText" style="width: 170px;" value=""
+                   id="xheSkype">
+        </div>
+        <div style="float: left; width: 80px; text-align: right;">显示名称：</div>
+        <div style="float: left;">
+            <input type="text" class="xheText" value="" style="width: 170px;"
+                   id="xheNameSkype">
+        </div>
+        <div style="float: right; margin-top: 20px; *width: 90px;">
+            <button style="cursor: pointer;" onclick="skype_click();" class="skype_click">确定</button>
+            <button style="cursor: pointer;">取消</button>
+        </div>
+    </div>
+</div>
+<div
+        style="display: none; width: 280px; margin-top: 15px; height: 220px;"
+        id="xheDialogAliWangWang"  class="div_frame">
+    <div class="xheDialog">
+        <div style="float: left; width: 80px; text-align: right;">用户名：</div>
+        <div style="float: left;">
+            <input type="text" class="xheText" style="width: 170px;" value=""
+                   id="xheAliWangWang">
+        </div>
+        <div style="float: left; width: 80px; text-align: right;">显示名称：</div>
+        <div style="float: left;">
+            <input type="text" class="xheText" value="" style="width: 170px;"
+                   id="xheNameAliWangWang">
+        </div>
+        <div style="clear: both;">
+            <div
+                    style="float: left; width: 80px; line-height: 23px; text-align: right;">状态：</div>
+            <div style="float: left; width: 100px;">
+                <input type="radio" value="0" id="showAliWangWangstate0"
+                       name="showAliWangWangstate" style="border: none;"
+                       checked="checked">&nbsp;<span
+                    onclick="$('#showAliWangWangstate0')[0].click()"
+                    style="cursor: default;">一直在线</span>
+            </div>
+            <div style="float: left; width: 100px;">
+                <input type="radio" value="1" id="showAliWangWangstate1"
+                       name="showAliWangWangstate" style="border: none;">&nbsp;<span
+                    onclick="$('#showAliWangWangstate1')[0].click()"
+                    style="cursor: default;">实时</span>
+            </div>
+        </div>
+        <div style="float: right; margin-top: 20px; *width: 90px;">
+            <button style="cursor: pointer;" onclick="ali_click();" class="aliWangWang_click">确定</button>
+            <button style="cursor: pointer;">取消</button>
+        </div>
+    </div>
+</div>
+<div
+        style="display: none; width: 280px; margin-top: 15px; height: 220px;"
+        id="xheDialogTaoBaoWangWang"  class="div_frame">
+    <div class="xheDialog">
+        <div style="float: left; width: 80px; text-align: right;">用户名：</div>
+        <div style="float: left;">
+            <input type="text" class="xheText" style="width: 170px;" value=""
+                   id="xheTaoBaoWangWang">
+        </div>
+        <div style="float: left; width: 80px; text-align: right;">显示名称：</div>
+        <div style="float: left;">
+            <input type="text" class="xheText" value="" style="width: 170px;"
+                   id="xheNameTaoBaoWangWang">
+        </div>
+        <div style="clear: both;">
+            <div
+                    style="float: left; width: 80px; line-height: 23px; text-align: right;">状态：</div>
+            <div style="float: left; width: 100px;">
+                <input type="radio" value="0" id="showTaoBaoWangWangstate0"
+                       name="showTaoBaoWangWangstate" style="border: none;"
+                       checked="checked">&nbsp;<span
+                    onclick="$('#showTaoBaoWangWangstate0')[0].click()"
+                    style="cursor: default;">一直在线</span>
+            </div>
+            <div style="float: left; width: 100px;">
+                <input type="radio" value="1" id="showTaoBaoWangWangstate1"
+                       name="showTaoBaoWangWangstate" style="border: none;">&nbsp;<span
+                    onclick="$('#showTaoBaoWangWangstate1')[0].click()"
+                    style="cursor: default;">实时</span>
+            </div>
+        </div>
+        <div style="float: right; margin-top: 20px; *width: 90px;">
+            <button style="cursor: pointer;" onclick="taobao_click();" class="taoBaoWangWang_click">确定</button>
+            <button style="cursor: pointer;">取消</button>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
