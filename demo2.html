@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ueditor demo</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- 加载编辑器的容器 -->
+    <script id="container" name="content" type="text/plain">
+        这里写你的初始化内容
+    </script>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+      var ue = UE.getEditor('container', {
+        // 宽高
+        initialFrameWidth: 770,
+        initialFrameHeight: 600,
+        // 是否自动长高
+        autoHeightEnabled: false,
+        // 是否启用元素路径
+        elementPathEnabled: false,
+        // 是否开启字数统计
+        wordCount: false,
+        // 自动保存间隔时间，单位ms
+        saveInterval: 500,
+        // 阻止Div转换成P标签
+        allowDivTransToP: false,
+        enterTag: 'br',  // 去掉自动添加的p和br标签
+        toolbars: [
+          ['fullscreen', 'source', '|', 'undo', 'redo', '|', 'fontsize', '|', 'blockquote', 'horizontal', '|', 'removeformat', 'formatmatch', 'link', 'unlink'],
+          ['bold', 'italic', 'underline', 'forecolor', 'backcolor', '|', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'rowspacingtop', 'rowspacingbottom', 'lineheight', '|', 'insertorderedlist', 'insertunorderedlist', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter'],
+          ['fontfamily', 'letterspacing', '|', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'autotypeset', 'pasteplain', '|', 'insertimage', 'emotion', 'map', '|', 'inserttable', 'searchreplace']
+        ]
+      });
+    </script>
+</body>
+
+</html>

@@ -7830,7 +7830,7 @@ Axis.prototype = {
 			}
 		}
 
-		// In full views, displaying the reset zoom button is not required
+		// In full view, displaying the reset zoom button is not required
 		this.displayBtn = newMin !== UNDEFINED || newMax !== UNDEFINED;
 		
 		// Do it
@@ -13445,7 +13445,7 @@ Series.prototype = {
 		}
 
 		// Hide cropped-away points - this only runs when the number of points is above cropThreshold, or when
-		// swithching views from non-grouped data to grouped data (#637)
+		// swithching view from non-grouped data to grouped data (#637)	
 		if (data && (processedDataLength !== (dataLength = data.length) || hasGroupedData)) {
 			for (i = 0; i < dataLength; i++) {
 				if (i === cropStart && !hasGroupedData) { // when has grouped data, clear all points

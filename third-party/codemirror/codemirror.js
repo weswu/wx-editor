@@ -26,7 +26,7 @@ var CodeMirror = (function() {
                 'autocorrect="off" autocapitalize="off"></textarea></div>' +
                 '<div class="CodeMirror-scroll" tabindex="-1">' +
                 '<div style="position: relative">' + // Set to the height of the text, causes scrolling
-                '<div style="position: relative">' + // Moved around its parent to cover visible views
+                '<div style="position: relative">' + // Moved around its parent to cover visible view
                 '<div class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div>' +
                 // Provides positioning relative to (visible) text origin
                 '<div class="CodeMirror-lines"><div style="position: relative">' +
@@ -76,7 +76,7 @@ var CodeMirror = (function() {
         // happened during the operation.
         var updateInput, userSelChange, changes, textChanged, selectionChanged, leaveInputAlone,
             gutterDirty, callbacks;
-        // Current visible range (may be bigger than the views window).
+        // Current visible range (may be bigger than the view window).
         var displayOffset = 0, showingFrom = 0, showingTo = 0, lastSizeC = 0;
         // bracketHighlighted is used to remember that a backet has been
         // marked.

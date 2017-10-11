@@ -25,7 +25,7 @@ window.onload = function () {
     renderTable( editorTable );
     initEvent();
     initUserConfig( editorTable.getAttribute( "data-chart" ) );
-    $( "#scrollBed .views-box:eq("+ currentChartType +")" ).trigger( "click" );
+    $( "#scrollBed .view-box:eq("+ currentChartType +")" ).trigger( "click" );
     updateViewType( currentChartType );
 
     dialog.addListener( "resize", function () {
@@ -52,7 +52,7 @@ function initChartsTypeView () {
 
     for ( var i = 0, len = chartsConfig.length; i<len; i++ ) {
 
-        contents.push( '<div class="views-box" data-chart-type="'+ i +'"><img width="300" src="images/charts'+ i +'.png"></div>' );
+        contents.push( '<div class="view-box" data-chart-type="'+ i +'"><img width="300" src="images/charts'+ i +'.png"></div>' );
 
     }
 
@@ -127,7 +127,7 @@ function initEvent () {
     var cacheValue = null,
         //图表类型数
         typeViewCount = chartsConfig.length- 1,
-        $chartsTypeViewBox = $( '#scrollBed .views-box' );
+        $chartsTypeViewBox = $( '#scrollBed .view-box' );
 
     $( ".charts-format" ).delegate( ".format-ctrl", "change", function () {
 
@@ -172,7 +172,7 @@ function initEvent () {
     } );
 
     //图表类型变化
-    $( '#scrollBed' ).delegate( ".views-box", "click", function (e) {
+    $( '#scrollBed' ).delegate( ".view-box", "click", function (e) {
 
         var index = $( this ).attr( "data-chart-type" );
         $chartsTypeViewBox.removeClass( "selected" );

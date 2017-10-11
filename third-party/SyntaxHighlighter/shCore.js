@@ -714,7 +714,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
             /** Enables quick code copy and paste from double click. */
             'quick-code' : true,
 
-            /** Forces code views to be collapsed. */
+            /** Forces code view to be collapsed. */
             'collapse' : false,
 
             /** Enables or disables automatic links. */
@@ -3537,7 +3537,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 						'second section select sequence serializable set size smallint static ' +
 						'statistics table temp temporary then time timestamp to top transaction ' +
 						'translation trigger true truncate uncommitted union unique update values ' +
-						'varchar varying views when where with work';
+						'varchar varying view when where with work';
 
 		var operators =	'all and any between cross in join like not null or outer some';
 

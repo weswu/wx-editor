@@ -182,7 +182,7 @@
             var start = editor.selection.getStart(), color,
                 cell = domUtils.findParentByTagName(start, ["td", "th", "caption"], true);
             color = cell && domUtils.getComputedStyle(cell, "border-color");
-            if (!color)  color = "#ddd";
+            if (!color)  color = "#DDDDDD";
             return color;
         },
         setColor:function (color) {
