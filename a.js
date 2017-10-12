@@ -1,7 +1,7 @@
 /*!
  * UEditor
  * version: ueditor
- * build: Sun Sep 25 2016 11:06:46 GMT+0800 (CST)
+ * build: Thu Oct 12 2017 15:55:00 GMT+0800 (中国标准时间)
  */
 
 (function(){
@@ -6748,7 +6748,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
         me.setOpt(Editor.defaultOptions(me));
 
         /* 尝试异步加载后台配置 */
-        me.loadServerConfig();
+        // me.loadServerConfig();
 
         if(!utils.isEmptyObject(UE.I18N)){
             //修改默认的语言类型
@@ -9967,7 +9967,7 @@ var LocalStorage = UE.LocalStorage = (function () {
 UE.plugins['defaultfilter'] = function () {
     var me = this;
     me.setOpt({
-        'allowDivTransToP':true,
+        'allowDivTransToP':false,
         'disabledTableInTable':true
     });
     //默认的过滤处理
@@ -9989,12 +9989,15 @@ UE.plugins['defaultfilter'] = function () {
             if (node.type == 'element') {
                 if (!dtd.$cdata[node.tagName] && me.options.autoClearEmptyNode && dtd.$inline[node.tagName] && !dtd.$empty[node.tagName] && (!node.attrs || utils.isEmptyObject(node.attrs))) {
                     if (!node.firstChild()) node.parentNode.removeChild(node);
+                    /* wes 保留span标签样式
                     else if (node.tagName == 'span' && (!node.attrs || utils.isEmptyObject(node.attrs))) {
                         node.parentNode.removeChild(node, true)
                     }
+                    */
                     return;
                 }
                 switch (node.tagName) {
+                  /* wes 样式删除
                     case 'style':
                     case 'script':
                         node.setAttr({
@@ -10005,6 +10008,7 @@ UE.plugins['defaultfilter'] = function () {
                         node.tagName = 'div';
                         node.innerHTML('');
                         break;
+                        */
                     case 'a':
                         if (val = node.getAttr('href')) {
                             node.setAttr('_href', val)
@@ -10102,6 +10106,7 @@ UE.plugins['defaultfilter'] = function () {
                     case 'dd':
                         node.tagName = 'li';
                         break;
+                    /* wes 样式删除
                     case 'li':
                         var className = node.getAttr('class');
                         if (!className || !/list\-/.test(className)) {
@@ -10112,6 +10117,7 @@ UE.plugins['defaultfilter'] = function () {
                             node.parentNode.insertAfter(n, node);
                         });
                         break;
+                    */
                     case 'td':
                     case 'th':
                     case 'caption':
@@ -10144,9 +10150,11 @@ UE.plugins['defaultfilter'] = function () {
                 if (me.options.autoClearEmptyNode && dtd.$inline[node.tagName] && !dtd.$empty[node.tagName] && (!node.attrs || utils.isEmptyObject(node.attrs))) {
 
                     if (!node.firstChild()) node.parentNode.removeChild(node);
+                    /* wes 保留span标签样式
                     else if (node.tagName == 'span' && (!node.attrs || utils.isEmptyObject(node.attrs))) {
                         node.parentNode.removeChild(node, true)
                     }
+                    */
                     return;
                 }
                 switch (node.tagName) {
@@ -14553,6 +14561,8 @@ UE.plugins['paste'] = function () {
         range.selectNodeContents(pastebin).select(true);
 
         setTimeout(function () {
+          // wes 粘贴去p标签
+          /*
             if (browser.webkit) {
                 for (var i = 0, pastebins = doc.querySelectorAll('#baidu_pastebin'), pi; pi = pastebins[i++];) {
                     if (domUtils.isEmptyNode(pi)) {
@@ -14569,6 +14579,7 @@ UE.plugins['paste'] = function () {
             }
             range.moveToBookmark(bk).select(true);
             callback(pastebin);
+            */
         }, 0);
     }
 
@@ -14802,9 +14813,11 @@ UE.plugins['paste'] = function () {
             if ((browser.ie || browser.opera) && ((!e.ctrlKey && !e.metaKey) || e.keyCode != '86')) {
                 return;
             }
+            /*
             getClipboardData.call(me, function (div) {
                 filter(div);
             });
+            */
         });
 
     });
@@ -14822,7 +14835,6 @@ UE.plugins['paste'] = function () {
         }
     }
 };
-
 
 
 // plugins/puretxtpaste.js
@@ -15156,6 +15168,7 @@ UE.plugins['list'] = function () {
     });
     //进入编辑器的li要套p标签
     me.addInputRule(function(root){
+      /* wes li不加p标签
         utils.each(root.getNodesByTagName('li'),function(li){
             var tmpP = UE.uNode.createElement('p');
             for(var i= 0,ci;ci=li.children[i];){
@@ -15187,6 +15200,7 @@ UE.plugins['list'] = function () {
                 p.removeChild(lastChild)
             }
         });
+        */
         if(me.options.autoTransWordToList){
             var orderlisttype = {
                     'num1':/^\d+\)/,
@@ -15277,7 +15291,8 @@ UE.plugins['list'] = function () {
 
     //调整索引标签
     me.addListener('contentchange',function(){
-        adjustListStyle(me.document)
+        //  wes
+        // adjustListStyle(me.document)
     });
 
     function adjustListStyle(doc,ignore){
@@ -15310,9 +15325,11 @@ UE.plugins['list'] = function () {
 
             var style = domUtils.getStyle(node, 'list-style-type');
             style && (node.style.cssText = 'list-style-type:' + style);
-            node.className = utils.trim(node.className.replace(/list-paddingleft-\w+/,'')) + ' list-paddingleft-' + type;
+            // wes 自动给ul增加一个内置的样式
+            //node.className = utils.trim(node.className.replace(/list-paddingleft-\w+/,'')) + ' list-paddingleft-' + type;
             utils.each(domUtils.getElementsByTagName(node,'li'),function(li){
-                li.style.cssText && (li.style.cssText = '');
+                // 自动去除粘贴进去的代码的li的style样式
+                // li.style.cssText && (li.style.cssText = '');
                 if(!li.firstChild){
                     domUtils.remove(li);
                     return;
@@ -15375,9 +15392,11 @@ UE.plugins['list'] = function () {
             domUtils.remove(preList);
         }
         !ignoreEmpty && domUtils.isEmptyBlock(list) && domUtils.remove(list);
+        /* wes
         if(getStyle(list)){
             adjustListStyle(list.ownerDocument,true)
         }
+        */
     }
 
     function setListStyle(list,style){
@@ -16171,7 +16190,6 @@ UE.plugins['list'] = function () {
             }
         };
 };
-
 
 
 // plugins/source.js
@@ -23975,6 +23993,11 @@ UE.plugin.register('autosave', function (){
 
             'contentchange': function () {
 
+                // wes  去提示本地保存成功
+                if (!me.getOpt('enableAutoSave')) {
+                    return;
+                }
+
                 if ( !saveKey ) {
                     return;
                 }
@@ -24036,6 +24059,7 @@ UE.plugin.register('autosave', function (){
     }
 
 });
+
 
 // plugins/charts.js
 UE.plugin.register('charts', function (){
@@ -24483,7 +24507,7 @@ UE.plugin.register('simpleupload', function (){
 
             wrapper.innerHTML = '<form id="edui_form_' + timestrap + '" target="edui_iframe_' + timestrap + '" method="POST" enctype="multipart/form-data" action="' + me.getOpt('serverUrl') + '" ' +
             'style="' + btnStyle + '">' +
-            '<input id="edui_input_' + timestrap + '" type="file" accept="image/gif,image/jpeg,image/png,image/jpg,image/bmp" name="' + me.options.imageFieldName + '" ' +
+            '<input id="edui_input_' + timestrap + '" type="file" accept="image/*" name="' + me.options.imageFieldName + '" ' +
             'style="' + btnStyle + '">' +
             '</form>' +
             '<iframe id="edui_iframe_' + timestrap + '" name="edui_iframe_' + timestrap + '" style="display:none;width:0;height:0;border:0;margin:0;padding:0;position:absolute;"></iframe>';
@@ -24625,7 +24649,6 @@ UE.plugin.register('simpleupload', function (){
         }
     }
 });
-
 
 // plugins/serverparam.js
 /**
@@ -24865,7 +24888,6 @@ UE.plugins.xssFilter = function() {
 	//
 	if (whitList && config.inputXssFilter) {
 		this.addInputRule(function (root) {
-
 			root.traversal(function(node) {
 				if (node.type !== 'element') {
 					return false;
@@ -25365,7 +25387,7 @@ UE.ui = baidu.editor.ui = {};
             allPopups.push( this );
         },
         getHtmlTpl: function (){
-            return '<div id="##" class="edui-popup %%" onmousedown="return false;">' +
+            return '<div id="##" class="edui-popup %%">' +
                 ' <div id="##_body" class="edui-popup-body">' +
                 ' <iframe style="position:absolute;z-index:-1;left:0;top:0;background-color: transparent;" frameborder="0" width="100%" height="100%" src="about:blank"></iframe>' +
                 ' <div class="edui-shadow"></div>' +
@@ -25497,7 +25519,10 @@ UE.ui = baidu.editor.ui = {};
             var popSize = this.fitSize();
 
             var sideLeft, sideUp, left, top;
-            if (hoz) {
+            if (hoz === 'img') {
+                left = (sideLeft ? rect.right - popSize.width : rect.left);
+                top = (sideUp ? rect.bottom - popSize.height : rect.top);
+            }else if (hoz) {
                 sideLeft = this.canSideLeft && (rect.right + popSize.width > vpRect.right && rect.left > popSize.width);
                 sideUp = this.canSideUp && (rect.top + popSize.height > vpRect.bottom && rect.bottom > popSize.height);
                 left = (sideLeft ? rect.left - popSize.width : rect.right);
@@ -28020,7 +28045,10 @@ UE.ui = baidu.editor.ui = {};
                                                 dialog.render();
                                                 dialog.open();
                                             }
-
+                                            break;
+                                        case "insertimage":
+                                            // 隐藏多图上传
+                                            dialog.render();
                                             break;
                                         default:
                                             dialog.render();
@@ -28801,14 +28829,82 @@ UE.ui = baidu.editor.ui = {};
                     editor.ui._dialogs.linkDialog.open();
                 },
                 _onImgEditButtonClick:function (name) {
-                    this.hide();
-                    editor.ui._dialogs[name] && editor.ui._dialogs[name].open();
-
+                  // 图片替换
+                    if(name !== 'insertimageDialog'){
+                      this.hide();
+                      editor.ui._dialogs[name] && editor.ui._dialogs[name].open();
+                    }
                 },
                 _onImgSetFloat:function (value) {
                     this.hide();
                     editor.execCommand("imagefloat", value);
 
+                },
+                // wes
+                // 删除元素
+                _onImgDeleteClick:function(){
+                    this.hide();
+                    domUtils.remove(this.anchorEl);
+                },
+                // 图片边框
+                _onImgBorderClick:function(){
+                    this.hide();
+                    if(this.anchorEl.style.border){
+                        this.anchorEl.style.border="";
+                    }else{
+                        this.anchorEl.style.border="5px solid #fff";
+                    }
+                },
+                // 图片阴影
+                _onImgShadowClick:function(){
+                    this.hide();
+                    if(this.anchorEl.style.boxShadow == 'rgba(0, 0, 0, 0.329412) 6px 6px 5px 0px'){
+                        this.anchorEl.style.boxShadow="";
+                    }else{
+                        this.anchorEl.style.boxShadow="rgba(0, 0, 0, 0.329412) 6px 6px 5px 0px";
+                    }
+                },
+                // 图片圆角
+                _onImgRadiusClick:function(){
+                    this.hide();
+                    if(this.anchorEl.style.borderRadius == '50%'){
+                        this.anchorEl.style.borderRadius="";
+                    }else{
+                        this.anchorEl.style.borderRadius="50%";
+                    }
+                },
+                // 图片 自适应 宽度
+                _onImgAutoWidthClick:function(){
+                    var tar=$("#"+this.id).find('.nobr-icon-edit');
+                    if(this.anchorEl.style.width == '100%'){
+                        this.anchorEl.style.width="auto";
+                        tar.removeClass('nobr-icon-edit-mask');
+                        $("#"+this.id).find('.nobr-icon-edit').next().html('自适应屏幕宽度')
+                    }else{
+                        this.anchorEl.style.width="100%";
+                        this.anchorEl.style.height="auto";
+                        tar.addClass('nobr-icon-edit-mask');
+                        $("#"+this.id).find('.nobr-icon-edit').next().html('取消自适应')
+                    }
+                },
+                // 图片 宽度
+                _onImgWidthChange:function(){
+                    this.anchorEl.style.width=$('.nobr-img-width').val()+'px';
+                },
+                // 图片 高度
+                _onImgHeightChange:function(){
+                    this.anchorEl.style.height=$('.nobr-img-height').val()+'px';
+                },
+                // 图片 alt
+                _onImgAltChange:function(){
+                    this.anchorEl.alt=$('.nobr-img-alt').val();
+                },
+                _blank:function(){
+                    $("<p><br/></p>").insertAfter(this.anchorEl);
+                    e.hide();
+                },_preblank:function(){
+                    $("<p><br/></p>").insertBefore(this.anchorEl);
+                    e.hide();
                 },
                 _setIframeAlign:function (value) {
                     var frame = popup.anchorEl;
@@ -28910,12 +29006,27 @@ UE.ui = baidu.editor.ui = {};
                         if (!dialogs[dialogName]) {
                             return;
                         }
-                        str = '<nobr>' + editor.getLang("property") + ': '+
-                            '<span onclick=$$._onImgSetFloat("none") class="edui-clickable">' + editor.getLang("default") + '</span>&nbsp;&nbsp;' +
-                            '<span onclick=$$._onImgSetFloat("left") class="edui-clickable">' + editor.getLang("justifyleft") + '</span>&nbsp;&nbsp;' +
-                            '<span onclick=$$._onImgSetFloat("right") class="edui-clickable">' + editor.getLang("justifyright") + '</span>&nbsp;&nbsp;' +
-                            '<span onclick=$$._onImgSetFloat("center") class="edui-clickable">' + editor.getLang("justifycenter") + '</span>&nbsp;&nbsp;'+
-                            '<span onclick="$$._onImgEditButtonClick(\'' + dialogName + '\');" class="edui-clickable">' + editor.getLang("modify") + '</span></nobr>';
+
+                        // wes
+                        if(!img.getAttribute('alt') || img.getAttribute('alt') == 'undefined'){img.setAttribute('alt','')}
+                        str = '<nobr><div style="padding:5px">'
+                            + '<span class="nobr-img-auto-width" onclick=$$._onImgAutoWidthClick()><span class="edui-clickable nobr-icon-edit '+(img.style.width=='100%'? 'nobr-icon-edit-mask' : '')+'"></span><span style="vertical-align: super;">'+(img.style.width=='100%'? '取消自适应' : '自适应屏幕宽度')+'</span></span>'
+                            + '<span class="edui-clickable line"></span>'
+                            + '<span onclick="$$._onImgEditButtonClick(\'' + dialogName + '\');" class="edui-clickable edui-clickable1" title="替换图片"></span>'
+                            + '<span class="edui-clickable line"></span>'
+                            + '<span onclick=$$._onImgSetFloat("left") class="edui-clickable edui-clickable2" title="居左对齐"></span>'
+                            + '<span onclick=$$._onImgSetFloat("center") class="edui-clickable edui-clickable3" title="居中对齐"></span>'
+                            + '<span onclick=$$._onImgSetFloat("right") class="edui-clickable edui-clickable4" title="居右对齐"></span>'
+                            + '<span class="edui-clickable line"></span>'
+                            + '<span onclick=$$._onImgShadowClick() class="edui-clickable edui-clickable5" title="添加阴影"></span>'
+                            + '<span onclick=$$._onImgBorderClick() class="edui-clickable edui-clickable6" title="添加边框"></span>'
+                            + '<span onclick=$$._onImgRadiusClick() class="edui-clickable edui-clickable7" title="变为圆形"></span>'
+                            + '<hr style="margin:15px 5px;border-top: 1px solid #eee;"/>'
+                            + '<div><span class="nobr-left">宽度：</span><input type="text" onkeyup=$$._onImgWidthChange() class="nobr-input nobr-input-style nobr-img-width" value="'+img.width+'" autofocus />'
+                            + '<span class="nobr-left" style="padding-left: 20px;">高度：</span><input type="text" onkeyup=$$._onImgHeightChange() class="nobr-input nobr-input-style nobr-img-height" value="'+img.height+'" autofocus /></div>'
+                            + '<br/><div><span class="nobr-left">图片描述：</span><input type="text" style="width:158px" onkeyup=$$._onImgAltChange() class="nobr-input nobr-img-alt" value="'+img.getAttribute('alt')+'" autofocus /></div>'
+                          + '</div></nobr>';
+
 
                         !html && (html = popup.formatHtml(str))
 
@@ -28942,7 +29053,10 @@ UE.ui = baidu.editor.ui = {};
                     if (html) {
                         popup.getDom('content').innerHTML = html;
                         popup.anchorEl = img || link;
-                        popup.showAnchor(popup.anchorEl);
+                        if(popup.anchorEl){
+                            // wes 图片替换组件左浮动
+                            popup.showAnchor(popup.anchorEl, "img");
+                        }
                     } else {
                         popup.hide();
                     }
@@ -29482,6 +29596,7 @@ UE.ui = baidu.editor.ui = {};
     }
 
 })();
+
 
 // adapter/message.js
 UE.registerUI('message', function(editor) {
