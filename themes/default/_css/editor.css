@@ -1,12 +1,9 @@
 /*UI工具栏、编辑区域、底部*/
 .edui-default .edui-editor {
-    border: 1px solid #d4d4d4;
+    border: 1px solid #e7e7eb;
     background-color: white;
     position: relative;
     overflow: visible;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
 }
 .edui-editor div{
     width:auto;
@@ -15,39 +12,21 @@
 .edui-default .edui-editor-toolbarbox {
     position: relative;
     zoom: 1;
-    -webkit-box-shadow:0 1px 4px rgba(204, 204, 204, 0.6);
-    -moz-box-shadow:0 1px 4px rgba(204, 204, 204, 0.6);
-    box-shadow:0 1px 4px rgba(204, 204, 204, 0.6);
-    border-top-left-radius:2px;
-    border-top-right-radius:2px;
 }
 
 .edui-default .edui-editor-toolbarboxouter {
-    border-bottom: 1px solid #d4d4d4;
-    background-color: #fafafa;
-    background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
-    background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
-    background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
-    background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
-    background-repeat: repeat-x;
-    /*border: 1px solid #d4d4d4;*/
-    -webkit-border-radius: 4px 4px 0 0;
-    -moz-border-radius: 4px 4px 0 0;
-    border-radius: 4px 4px 0 0;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);
+    border-bottom: 1px solid #E7E7EC;
+    background-color: #fff;
     *zoom: 1;
-    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 }
 
 .edui-default .edui-editor-toolbarboxinner {
-    padding: 2px;
+    padding-bottom: 10px;
 }
 
 .edui-default .edui-editor-iframeholder {
     position: relative;
+    right: 2px;
     /*for fix ie6 toolbarmsg under iframe bug. relative -> static */
     /*_position: static !important;*
 }
@@ -116,11 +95,13 @@
 }
 
 .edui-default .edui-bubble .edui-popup-content {
-    border: 1px solid #DCAC6C;
-    background-color: #fff6d9;
+    line-height: 15px;
+    border: 1px solid #e8e7ec;
+    background: #FFF;
     padding: 5px;
+    padding-bottom: 10px;
     font-size: 10pt;
-    font-family: "宋体";
+    font-family: "Helvitica Neue",Helvitica,Arial,"Hiragino Sans GB","Microsoft YaHei","Arial Regular",sans-serif;
 }
 
 .edui-default .edui-bubble .edui-shadow {
@@ -165,4 +146,101 @@
     line-height: 16px;
     cursor: pointer;
     color: red;
+}
+
+/* 自定义样式 */
+.edui-default span.edui-clickable1 {
+    background-position: 0px -8px;
+}
+
+.edui-default span.edui-clickable2 {
+    background-position: -84px -7px;
+}
+
+.edui-default span.edui-clickable3 {
+    background-position: -151px -7px;
+}
+
+.edui-default span.edui-clickable4 {
+    background-position: -215px -7px;
+}
+
+.edui-default span.edui-clickable5 {
+    background-position: -315px -7px;
+}
+
+.edui-default span.edui-clickable6 {
+    background-position: -388px -7px;
+}
+
+.edui-default span.edui-clickable7 {
+    background-position: -466px -7px;
+}
+
+.edui-default span.edui-clickable1:hover {
+    background-position: 0 -48px;
+}
+
+.edui-default span.edui-clickable2:hover {
+    background-position: -84px -47px;
+}
+
+.edui-default span.edui-clickable3:hover {
+    background-position: -151px -47px;
+}
+
+.edui-default span.edui-clickable4:hover {
+    background-position: -215px -47px;
+}
+
+.edui-default span.edui-clickable5:hover {
+    background-position: -315px -47px;
+}
+
+.edui-default span.edui-clickable6:hover {
+    background-position: -388px -47px;
+}
+
+.edui-default span.edui-clickable7:hover {
+    background-position: -466px -47px;
+}
+
+.edui-default span.line {
+    width: 8px;
+    height: 20px;
+    background: url('../images/tool.png')no-repeat -59px -3px;
+}
+
+
+.edui-default .nobr-input-style {
+    width: 50px;
+}
+
+.edui-default .nobr-input {
+    border: 1px solid #ddd!important;
+    border-radius: 2px;
+    padding: 4px 12px;
+    box-shadow: none;
+}
+
+.edui-default span.nobr-icon-edit {
+    background-position: -17px -97px;
+}
+
+.edui-default span.nobr-icon-edit-mask {
+    background-position: -17px -77px;
+}
+
+.edui-default .nobr-img-auto-width {
+    cursor: pointer;
+    width: 124px;
+    display: inline-block;
+}
+
+.edui-default .nobr-img-auto-width:hover .nobr-icon-edit {
+    background-position: 3px -97px;
+}
+
+.edui-default .nobr-img-auto-width:hover .nobr-icon-edit-mask {
+    background-position: 3px -77px;
 }

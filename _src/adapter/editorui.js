@@ -251,7 +251,10 @@
                                                 dialog.render();
                                                 dialog.open();
                                             }
-
+                                            break;
+                                        case "insertimage":
+                                            // 隐藏多图上传
+                                            dialog.render();
                                             break;
                                         default:
                                             dialog.render();

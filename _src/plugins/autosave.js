@@ -66,6 +66,11 @@ UE.plugin.register('autosave', function (){
 
             'contentchange': function () {
 
+                // wes  去提示本地保存成功
+                if (!me.getOpt('enableAutoSave')) {
+                    return;
+                }
+
                 if ( !saveKey ) {
                     return;
                 }

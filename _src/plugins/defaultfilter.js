@@ -4,7 +4,7 @@
 UE.plugins['defaultfilter'] = function () {
     var me = this;
     me.setOpt({
-        'allowDivTransToP':true,
+        'allowDivTransToP':false,
         'disabledTableInTable':true
     });
     //默认的过滤处理
@@ -26,12 +26,15 @@ UE.plugins['defaultfilter'] = function () {
             if (node.type == 'element') {
                 if (!dtd.$cdata[node.tagName] && me.options.autoClearEmptyNode && dtd.$inline[node.tagName] && !dtd.$empty[node.tagName] && (!node.attrs || utils.isEmptyObject(node.attrs))) {
                     if (!node.firstChild()) node.parentNode.removeChild(node);
+                    /* wes 保留span标签样式
                     else if (node.tagName == 'span' && (!node.attrs || utils.isEmptyObject(node.attrs))) {
                         node.parentNode.removeChild(node, true)
                     }
+                    */
                     return;
                 }
                 switch (node.tagName) {
+                  /* wes 样式删除
                     case 'style':
                     case 'script':
                         node.setAttr({
@@ -42,6 +45,7 @@ UE.plugins['defaultfilter'] = function () {
                         node.tagName = 'div';
                         node.innerHTML('');
                         break;
+                        */
                     case 'a':
                         if (val = node.getAttr('href')) {
                             node.setAttr('_href', val)
@@ -139,6 +143,7 @@ UE.plugins['defaultfilter'] = function () {
                     case 'dd':
                         node.tagName = 'li';
                         break;
+                    /* wes 样式删除
                     case 'li':
                         var className = node.getAttr('class');
                         if (!className || !/list\-/.test(className)) {
@@ -149,6 +154,7 @@ UE.plugins['defaultfilter'] = function () {
                             node.parentNode.insertAfter(n, node);
                         });
                         break;
+                    */
                     case 'td':
                     case 'th':
                     case 'caption':
@@ -181,9 +187,11 @@ UE.plugins['defaultfilter'] = function () {
                 if (me.options.autoClearEmptyNode && dtd.$inline[node.tagName] && !dtd.$empty[node.tagName] && (!node.attrs || utils.isEmptyObject(node.attrs))) {
 
                     if (!node.firstChild()) node.parentNode.removeChild(node);
+                    /* wes 保留span标签样式
                     else if (node.tagName == 'span' && (!node.attrs || utils.isEmptyObject(node.attrs))) {
                         node.parentNode.removeChild(node, true)
                     }
+                    */
                     return;
                 }
                 switch (node.tagName) {

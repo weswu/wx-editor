@@ -33,6 +33,8 @@ UE.plugins['paste'] = function () {
         range.selectNodeContents(pastebin).select(true);
 
         setTimeout(function () {
+          // wes 粘贴去p标签
+          /*
             if (browser.webkit) {
                 for (var i = 0, pastebins = doc.querySelectorAll('#baidu_pastebin'), pi; pi = pastebins[i++];) {
                     if (domUtils.isEmptyNode(pi)) {
@@ -49,6 +51,7 @@ UE.plugins['paste'] = function () {
             }
             range.moveToBookmark(bk).select(true);
             callback(pastebin);
+            */
         }, 0);
     }
 
@@ -282,9 +285,11 @@ UE.plugins['paste'] = function () {
             if ((browser.ie || browser.opera) && ((!e.ctrlKey && !e.metaKey) || e.keyCode != '86')) {
                 return;
             }
+            /*
             getClipboardData.call(me, function (div) {
                 filter(div);
             });
+            */
         });
 
     });
@@ -302,4 +307,3 @@ UE.plugins['paste'] = function () {
         }
     }
 };
-

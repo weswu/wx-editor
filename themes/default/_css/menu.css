@@ -25,8 +25,8 @@
 .edui-default .edui-menuitem .edui-icon {
     width: 20px !important;
     height: 20px !important;
-    background: url(../images/icons.png) 0 -4000px;
-    background: url(../images/icons.gif) 0 -4000px\9;
+    background: url(../images/newicons.png);
+    background: url(../images/newicons.png);
 }
 
 .edui-default .edui-menuitem .edui-label {
@@ -43,4 +43,3 @@
 .edui-default .edui-state-disabled .edui-menuitem-label {
     color: gray;
 }
-

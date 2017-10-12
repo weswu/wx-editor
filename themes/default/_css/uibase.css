@@ -104,9 +104,15 @@ div.edui-box {
 }
 
 .edui-default span.edui-clickable {
-    color: blue;
+    z-index: 999;
+    width: 23px;
+    height: 20px;
+    margin: 0 4px;
+    display: inline-block;
+    background: url(../images/tool.png)no-repeat 0px -8px;
+    color: #fff;
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration: none;  
 }
 
 .edui-default span.edui-unclickable {

@@ -53,7 +53,6 @@ UE.plugins.xssFilter = function() {
 	//
 	if (whitList && config.inputXssFilter) {
 		this.addInputRule(function (root) {
-
 			root.traversal(function(node) {
 				if (node.type !== 'element') {
 					return false;

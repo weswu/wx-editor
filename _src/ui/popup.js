@@ -42,7 +42,7 @@
             allPopups.push( this );
         },
         getHtmlTpl: function (){
-            return '<div id="##" class="edui-popup %%" onmousedown="return false;">' +
+            return '<div id="##" class="edui-popup %%">' +
                 ' <div id="##_body" class="edui-popup-body">' +
                 ' <iframe style="position:absolute;z-index:-1;left:0;top:0;background-color: transparent;" frameborder="0" width="100%" height="100%" src="about:blank"></iframe>' +
                 ' <div class="edui-shadow"></div>' +
@@ -174,7 +174,10 @@
             var popSize = this.fitSize();
 
             var sideLeft, sideUp, left, top;
-            if (hoz) {
+            if (hoz === 'img') {
+                left = (sideLeft ? rect.right - popSize.width : rect.left);
+                top = (sideUp ? rect.bottom - popSize.height : rect.top);
+            }else if (hoz) {
                 sideLeft = this.canSideLeft && (rect.right + popSize.width > vpRect.right && rect.left > popSize.width);
                 sideUp = this.canSideUp && (rect.top + popSize.height > vpRect.bottom && rect.bottom > popSize.height);
                 left = (sideLeft ? rect.left - popSize.width : rect.right);
@@ -245,7 +248,7 @@
         }
     };
     utils.inherits(Popup, UIBase);
-    
+
     domUtils.on( document, 'mousedown', function ( evt ) {
         var el = evt.target || evt.srcElement;
         closeAllPopup( evt,el );

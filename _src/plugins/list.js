@@ -228,6 +228,7 @@ UE.plugins['list'] = function () {
     });
     //进入编辑器的li要套p标签
     me.addInputRule(function(root){
+      /* wes li不加p标签
         utils.each(root.getNodesByTagName('li'),function(li){
             var tmpP = UE.uNode.createElement('p');
             for(var i= 0,ci;ci=li.children[i];){
@@ -259,6 +260,7 @@ UE.plugins['list'] = function () {
                 p.removeChild(lastChild)
             }
         });
+        */
         if(me.options.autoTransWordToList){
             var orderlisttype = {
                     'num1':/^\d+\)/,
@@ -349,7 +351,8 @@ UE.plugins['list'] = function () {
 
     //调整索引标签
     me.addListener('contentchange',function(){
-        adjustListStyle(me.document)
+        //  wes
+        // adjustListStyle(me.document)
     });
 
     function adjustListStyle(doc,ignore){
@@ -382,9 +385,11 @@ UE.plugins['list'] = function () {
 
             var style = domUtils.getStyle(node, 'list-style-type');
             style && (node.style.cssText = 'list-style-type:' + style);
-            node.className = utils.trim(node.className.replace(/list-paddingleft-\w+/,'')) + ' list-paddingleft-' + type;
+            // wes 自动给ul增加一个内置的样式
+            //node.className = utils.trim(node.className.replace(/list-paddingleft-\w+/,'')) + ' list-paddingleft-' + type;
             utils.each(domUtils.getElementsByTagName(node,'li'),function(li){
-                li.style.cssText && (li.style.cssText = '');
+                // 自动去除粘贴进去的代码的li的style样式
+                // li.style.cssText && (li.style.cssText = '');
                 if(!li.firstChild){
                     domUtils.remove(li);
                     return;
@@ -447,9 +452,11 @@ UE.plugins['list'] = function () {
             domUtils.remove(preList);
         }
         !ignoreEmpty && domUtils.isEmptyBlock(list) && domUtils.remove(list);
+        /* wes
         if(getStyle(list)){
             adjustListStyle(list.ownerDocument,true)
         }
+        */
     }
 
     function setListStyle(list,style){
@@ -1243,4 +1250,3 @@ UE.plugins['list'] = function () {
             }
         };
 };
-
