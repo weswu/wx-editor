@@ -1,13 +1,4 @@
-
-
-### 在线地址
-
-http://wca.jihui88.com:5454/static/ueditor1_4_3_3/demo.html
-
-
-
-
-Get Started
+百度编辑器优化
 =====
 
 ## ueditor富文本编辑器介绍
