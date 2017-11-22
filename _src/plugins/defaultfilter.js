@@ -59,6 +59,7 @@ UE.plugins['defaultfilter'] = function () {
                                 break;
                             }
                         }
+                        debugger
                         node.setAttr('_src', node.getAttr('src'));
                         break;
                     case 'span':

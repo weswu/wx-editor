@@ -404,7 +404,7 @@
                 container.style.zIndex = options.zIndex;
 
                 var html = ( ie && browser.version < 9  ? '' : '<!DOCTYPE html>') +
-                    '<html xmlns=\'http://www.w3.org/1999/xhtml\'><head>' +
+                    '<html xmlns=\'http://www.w3.org/1999/xhtml\'><head><meta name=\'referrer\' content=\'never\'>' +
                     ( options.iframeCssUrl ? '<link rel=\'stylesheet\' type=\'text/css\' href=\'' + utils.unhtml(options.iframeCssUrl) + '\'/>' : '' ) +
                     (options.initialStyle ? '<style>' + options.initialStyle + '</style>' : '') +
                     '</head><body class=\'view\' ></body>' +
