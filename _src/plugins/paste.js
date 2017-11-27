@@ -16,19 +16,22 @@ UE.plugins['paste'] = function () {
             return;
         }
         var range = this.selection.getRange(),
-            bk = range.createBookmark(),
+            // bk = range.createBookmark(),
+            
         //创建剪贴的容器div
-            pastebin = doc.createElement('div');
+        pastebin = doc.createElement('div');
         pastebin.id = 'baidu_pastebin';
+        // 微信防盗链接
+        range.endContainer.innerHTML = range.endContainer.innerHTML.replace(/((http:\/\/)|(https:\/\/))?mmbiz.qpic.cn/g, 'http://mpimg.jihui88.com')
         // Safari 要求div必须有内容，才能粘贴内容进来
         browser.webkit && pastebin.appendChild(doc.createTextNode(domUtils.fillChar + domUtils.fillChar));
         doc.body.appendChild(pastebin);
         //trace:717 隐藏的span不能得到top
         //bk.start.innerHTML = '&nbsp;';
-        bk.start.style.display = '';
+        //bk.start.style.display = '';
         pastebin.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;left:-1000px;white-space:nowrap;top:" +
             //要在现在光标平行的位置加入，否则会出现跳动的问题
-            domUtils.getXY(bk.start).y + 'px';
+            //domUtils.getXY(bk.start).y + 'px';
 
         range.selectNodeContents(pastebin).select(true);
 
@@ -285,11 +288,9 @@ UE.plugins['paste'] = function () {
             if ((browser.ie || browser.opera) && ((!e.ctrlKey && !e.metaKey) || e.keyCode != '86')) {
                 return;
             }
-            /*
             getClipboardData.call(me, function (div) {
                 filter(div);
             });
-            */
         });
 
     });

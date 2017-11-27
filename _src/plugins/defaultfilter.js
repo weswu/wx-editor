@@ -59,8 +59,7 @@ UE.plugins['defaultfilter'] = function () {
                                 break;
                             }
                         }
-                        debugger
-                        node.setAttr('_src', node.getAttr('src'));
+                        // node.setAttr('_src', node.getAttr('src')); 去_src
                         break;
                     case 'span':
                         if (browser.webkit && (val = node.getStyle('white-space'))) {
