@@ -58,6 +58,9 @@
 .ue_colorpicker_group{
     margin-bottom: 12px;
 }
+.ue_colorpicker_group td{
+    height: 24px;border:none;
+}
 /* 下 */
 .ue_colorpicker_toolbar {
     overflow: hidden;
