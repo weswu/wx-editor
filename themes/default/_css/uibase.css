@@ -74,6 +74,7 @@ div.edui-box {
 .edui-default .edui-popup .edui-bordereraser {
     position: absolute;
     overflow: hidden;
+    display: none;
 }
 
 .edui-default .edui-tablepicker .edui-canvas {
@@ -112,7 +113,7 @@ div.edui-box {
     background: url(../images/tool.png)no-repeat 0px -8px;
     color: #fff;
     cursor: pointer;
-    text-decoration: none;  
+    text-decoration: none;
 }
 
 .edui-default span.edui-unclickable {

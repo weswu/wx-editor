@@ -1,26 +1,32 @@
 /* 颜色弹出菜单 */
 .edui-default .edui-colorpicker-topbar {
-    height: 27px;
-    width: 200px;
-    /*border-bottom: 1px gray dashed;*/
+    padding-bottom: 10px;
+    width: 228px;
 }
 
 .edui-default .edui-colorpicker-preview {
-    height: 20px;
-    border: 1px inset black;
-    margin-left: 1px;
-    width: 128px;
-    float: left;
+    margin-bottom: 5px;
+    color: #8d8d8d;
 }
 
 .edui-default .edui-colorpicker-nocolor {
-    float: right;
     margin-right: 1px;
     font-size: 12px;
     line-height: 14px;
-    height: 14px;
-    border: 1px solid #333;
     padding: 3px 5px;
+    overflow: hidden;
+}
+.ue_colorpicker_nocolor_bg {
+    background: url(../images/newicons.png) no-repeat;
+    background-position: -1px -1071px;
+}
+
+.ue_colorpicker_square {
+    float: left;
+    width: 18px;
+    height: 18px;
+    margin: 0 4px 4px 0;
+    border: 1px solid #e7e7eb;
     cursor: pointer;
 }
 
@@ -29,18 +35,13 @@
 }
 
 .edui-default .edui-colorpicker-colorcell {
-    width: 14px;
-    height: 14px;
+    width: 18px;
+    height: 18px;
     display: block;
     margin: 0;
     cursor: pointer;
 }
 
-.edui-default .edui-colorpicker-colorcell:hover {
-    width: 14px;
-    height: 14px;
-    margin: 0;
-}
 .edui-default .edui-colorpicker-advbtn{
     display: block;
     text-align: center;
@@ -52,6 +53,62 @@
 }
 .arrow_up{
     background: white url('../images/arrow_up.png') no-repeat center;
+}
+/* 中 */
+.ue_colorpicker_group{
+    margin-bottom: 12px;
+}
+/* 下 */
+.ue_colorpicker_toolbar {
+    overflow: hidden;
+    border-top: 1px dotted #e7e7eb;
+    padding-top: 15px;
+}
+.ue_colorpicker_toolbar .showColor{
+    width: 26px;
+    height: 26px;
+    margin-right: 6px;
+    background-color: #f00;
+    float: left;
+    margin: 0 4px 4px 0;
+    border: 1px solid #e7e7eb;
+    cursor: pointer;
+}
+.ue_colorpicker_toolbar .ue_colorpicker_input_box{
+    float: left;
+    overflow: hidden;
+    display: block;
+    border: 1px solid #e7e7eb;
+    padding: 0 5px;
+}
+.ue_colorpicker_toolbar .ue_colorpicker_input_append{
+  line-height: 26px;
+  float: left;
+  margin-right: 4px;
+}
+.ue_colorpicker_toolbar .customColor{
+  width: 70px;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  line-height: 24px;
+  height: 24px;
+}
+.ue_colorpicker_toolbar .buttonColor{
+  float: left;border-radius:0;
+  margin-left: 6px;
+  padding: 0 22px;
+  height: 28px;
+  line-height: 28px;
+  text-decoration: none;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #e7e7eb;
+  background-color: #fff;
+  color: #222;'Microsoft YaHei
 }
 /*高级的样式*/
 .edui-colorpicker-adv{

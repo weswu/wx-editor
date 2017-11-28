@@ -43,7 +43,7 @@
 .edui-default .edui-toolbar .edui-splitbutton .edui-state-active .edui-splitbutton-body,
 .edui-default .edui-toolbar .edui-menubutton .edui-state-active .edui-menubutton-body {
     background-color: #ffffff;
-    border: 1px solid gray;
+    border: 1px solid #d9d9d9;
     padding: 0;
 }
 
@@ -55,7 +55,7 @@
 .edui-default .edui-toolbar .edui-splitbutton .edui-state-opened .edui-splitbutton-body,
 .edui-default .edui-toolbar .edui-menubutton .edui-state-opened .edui-menubutton-body {
     background-color: white;
-    border: 1px solid gray;
+    border: 1px solid transparent;
     padding: 0;
 }
 

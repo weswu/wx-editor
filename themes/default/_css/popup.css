@@ -15,10 +15,10 @@
 }
 
 .edui-default .edui-popup-content {
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0,0,0,.2);
+    border: 1px solid #e7e7eb;
     -webkit-background-clip: padding-box;
     -moz-background-clip: padding;
+    background-clip: padding-box;
     padding: 5px;
     background: #fff;
 }
