@@ -252,8 +252,12 @@
                                                 dialog.open();
                                             }
                                             break;
+                                        case "attachment":
+                                            // 隐藏图片上传
+                                            dialog.render();
+                                            break;
                                         case "insertimage":
-                                            // 隐藏多图上传
+                                            // 隐藏附件上传
                                             dialog.render();
                                             break;
                                         default:
