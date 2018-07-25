@@ -5,7 +5,7 @@ a{color:#607fa6;text-decoration:none}
 body{margin:0;padding:20px 50px;font-family:"Helvetica Neue",Helvetica,"Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif}
 .view{word-break:break-word;cursor:text;min-height:440px;word-wrap:break-word;-webkit-hyphens:auto;-ms-hyphens:auto;hyphens:auto;overflow-x:hidden}
 p{clear:both}
-img{*zoom:1;max-width:100%;*max-width:96%;height:auto}
+img{*zoom:1;max-width:100%;*max-width:96%;}
 iframe{width:301px!important;border:0;background-color:none}
 blockquote{margin:0;padding-left:10px;border-left:3px solid #dbdbdb}
 .vote_area{display:block}

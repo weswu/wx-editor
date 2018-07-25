@@ -320,8 +320,18 @@
                         dialogs = editor.ui._dialogs;
                     if (img && img.tagName == 'IMG') {
                         var dialogName = 'insertimageDialog';
+                        var html1 = '<span class="nobr-img-auto-width" onclick=$$._onImgAutoWidthClick()><span class="edui-clickable nobr-icon-edit '+(img.style.width=='100%'? 'nobr-icon-edit-mask' : '')+'"></span><span style="vertical-align: super;">'+(img.style.width=='100%'? '取消自适应' : '自适应屏幕宽度')+'</span></span>'
+                            + '<span class="edui-clickable line"></span>'
+                        var html2 = '<hr style="margin:15px 5px;border-top: 1px solid #eee;"/>'
+                        + '<div><span class="nobr-left">宽度：</span><input type="text" onkeyup=$$._onImgWidthChange() class="nobr-input nobr-input-style nobr-img-width" value="'+img.width+'" autofocus />'
+                        + '<span class="nobr-left" style="padding-left: 20px;">高度：</span><input type="text" onkeyup=$$._onImgHeightChange() class="nobr-input nobr-input-style nobr-img-height" value="'+img.height+'" autofocus /></div>'
+                        + '<br/><div><span class="nobr-left">图片描述：</span><input type="text" style="width:158px" onkeyup=$$._onImgAltChange() class="nobr-input nobr-img-alt" value="'+img.getAttribute('alt')+'" autofocus /></div>'
+                        var text1 = '替换图片'
                         if (img.className.indexOf("edui-faked-video") != -1 || img.className.indexOf("edui-upload-video") != -1) {
                             dialogName = "insertvideoDialog"
+                            html1 = ''
+                            html2 = ''
+                            text1 = '修改视频'
                         }
                         if (img.className.indexOf("edui-faked-webapp") != -1) {
                             dialogName = "webappDialog"
@@ -356,9 +366,8 @@
                         // wes
                         if(!img.getAttribute('alt') || img.getAttribute('alt') == 'undefined'){img.setAttribute('alt','')}
                         str = '<nobr><div style="padding:5px">'
-                            + '<span class="nobr-img-auto-width" onclick=$$._onImgAutoWidthClick()><span class="edui-clickable nobr-icon-edit '+(img.style.width=='100%'? 'nobr-icon-edit-mask' : '')+'"></span><span style="vertical-align: super;">'+(img.style.width=='100%'? '取消自适应' : '自适应屏幕宽度')+'</span></span>'
-                            + '<span class="edui-clickable line"></span>'
-                            + '<span onclick="$$._onImgEditButtonClick(\'' + dialogName + '\');" class="edui-clickable edui-clickable1" title="替换图片"></span>'
+                            + html1
+                            + '<span onclick="$$._onImgEditButtonClick(\'' + dialogName + '\');" class="edui-clickable edui-clickable1" title="' + text1 + '"></span>'
                             + '<span class="edui-clickable line"></span>'
                             + '<span onclick=$$._onImgSetFloat("left") class="edui-clickable edui-clickable2" title="居左对齐"></span>'
                             + '<span onclick=$$._onImgSetFloat("center") class="edui-clickable edui-clickable3" title="居中对齐"></span>'
@@ -367,12 +376,8 @@
                             + '<span onclick=$$._onImgShadowClick() class="edui-clickable edui-clickable5" title="添加阴影"></span>'
                             + '<span onclick=$$._onImgBorderClick() class="edui-clickable edui-clickable6" title="添加边框"></span>'
                             + '<span onclick=$$._onImgRadiusClick() class="edui-clickable edui-clickable7" title="变为圆形"></span>'
-                            + '<hr style="margin:15px 5px;border-top: 1px solid #eee;"/>'
-                            + '<div><span class="nobr-left">宽度：</span><input type="text" onkeyup=$$._onImgWidthChange() class="nobr-input nobr-input-style nobr-img-width" value="'+img.width+'" autofocus />'
-                            + '<span class="nobr-left" style="padding-left: 20px;">高度：</span><input type="text" onkeyup=$$._onImgHeightChange() class="nobr-input nobr-input-style nobr-img-height" value="'+img.height+'" autofocus /></div>'
-                            + '<br/><div><span class="nobr-left">图片描述：</span><input type="text" style="width:158px" onkeyup=$$._onImgAltChange() class="nobr-input nobr-img-alt" value="'+img.getAttribute('alt')+'" autofocus /></div>'
+                            + html2
                           + '</div></nobr>';
-
 
                         !html && (html = popup.formatHtml(str))
 

@@ -17,7 +17,8 @@
 
 .tabbody .panel table td{vertical-align: middle;}
 #videoUrl {
-    width: 490px;
+    width: 480px;
+    padding: 0 5px;
     height: 21px;
     line-height: 21px;
     margin: 8px 5px;

@@ -16,6 +16,7 @@
     <script type="text/javascript" src="dist/utf8-php/ueditor.config.js"></script>
     <!-- 编辑器源码文件 -->
     <script type="text/javascript" src="dist/utf8-php/ueditor.all.js"></script>
+    <script type="text/javascript" src="dist/utf8-php/lang/zh-cn/zh-cn.js"></script>
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
       var ue = UE.getEditor('container', {
@@ -37,8 +38,9 @@
         toolbars: [
           ['fullscreen', 'source', '|', 'undo', 'redo', '|', 'fontsize', '|', 'blockquote', 'horizontal', '|', 'removeformat', 'formatmatch', 'link', 'unlink'],
           ['bold', 'italic', 'underline', 'forecolor', 'backcolor', '|', 'indent', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'rowspacingtop', 'rowspacingbottom', 'lineheight', '|', 'insertorderedlist', 'insertunorderedlist', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter'],
-          ['fontfamily', 'letterspacing', '|', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'autotypeset', 'pasteplain', '|', 'insertimage', 'emotion', 'map', '|', 'inserttable', 'searchreplace', 'attachment']
-        ]
+          ['fontfamily', 'letterspacing', '|', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'autotypeset', 'pasteplain', '|', 'insertimage', 'emotion', 'map', 'insertvideo', '|', 'inserttable', 'searchreplace', 'attachment']
+        ],
+        themePath: 'http://www.jihui88.com/manage_v4/platform/ueditor1_4_3/themes/'
       });
     </script>
 </body>
