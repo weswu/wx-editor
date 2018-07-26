@@ -166,8 +166,22 @@
     }
     function convert_url(url){
         if ( !url ) return '';
+        /**
+        优酷  https://v.youku.com/v_show/id_XMzczODYwODYwNA==.html   http://player.youku.com/embed/XMzczODYwODYwNA==
+        腾讯
+        https://v.qq.com/x/cover/2aya3ibdmft6vdw/r0732r4nopu.html?start=57  https://v.qq.com/iframe/player.html?vid=v0368mw9gxj&tiny=0&auto=0
+        https://v.qq.com/x/cover/2cy4xg8ywpb47dw.html                       https://v.qq.com/iframe/player.html?vid=y0027tez0kj&tiny=0&auto=0
+        （no）乐视  http://www.le.com/ptv/vplay/26322741.html?ref=ym0203   http://www.le.com/ptv/vplay/26322741.html
+        （no）酷6  http://www.ku6.com/video/detail?id=pbH_S52h0G1IfLpB3fE1DX51clo.  https://rbv01.ku6.com/ECWPeD1rjfjiMJD36uLkBQ.mp4
+        **/
+        if (url.indexOf('player.youku.com') > -1 || url.indexOf('v.qq.com/x/cover') > -1) {
+          url = url.split('?')[0]
+        }
         url = utils.trim(url)
-            .replace(/v\.youku\.com\/v_show\/id_([\w\-=]+)\.html/i, 'player.youku.com/player.php/sid/$1/v.swf')
+            .replace(/v\.youku\.com\/v_show\/id_([\w\-=]+)\.html/i, 'player.youku.com/embed/$1')
+            .replace(/v\.qq\.com\/x\/cover\/[\w]+\/([\w]+)\.html/i, "v.qq.com/iframe/player.html?vid=$1")
+            .replace(/v\.qq\.com\/x\/cover\/([\w]+)\.html/i, "v.qq.com/iframe/player.html?vid=$1")
+            .replace(/v\.qq\.com\/cover\/[\w]+\/[\w]+\/([\w]+)\.html/i, "v.qq.com/iframe/player.html?vid=$1")
             .replace(/(www\.)?youtube\.com\/watch\?v=([\w\-]+)/i, "www.youtube.com/v/$2")
             .replace(/youtu.be\/(\w+)$/i, "www.youtube.com/v/$1")
             .replace(/v\.ku6\.com\/.+\/([\w\.]+)\.html.*$/i, "player.ku6.com/refer/$1/v.swf")
@@ -176,13 +190,7 @@
             .replace(/v\.pps\.tv\/play_([\w]+)\.html.*$/i, "player.pps.tv/player/sid/$1/v.swf")
             .replace(/www\.letv\.com\/ptv\/vplay\/([\d]+)\.html.*$/i, "i7.imgs.letv.com/player/swfPlayer.swf?id=$1&autoplay=0")
             .replace(/www\.tudou\.com\/programs\/view\/([\w\-]+)\/?/i, "www.tudou.com/v/$1")
-            .replace(/v\.qq\.com\/x\/cover\/[\w]+\/([\w]+)\.html/i, "imgcache.qq.com/tencentvideo_v1/playerv3/TPout.swf?vid=$1")
-            .replace(/v\.qq\.com\/cover\/[\w]+\/[\w]+\/([\w]+)\.html/i, "static.video.qq.com/TPout.swf?vid=$1")
-            .replace(/v\.qq\.com\/.+[\?\&]vid=([^&]+).*$/i, "static.video.qq.com/TPout.swf?vid=$1")
             .replace(/my\.tv\.sohu\.com\/[\w]+\/[\d]+\/([\d]+)\.shtml.*$/i, "share.vrs.sohu.com/my/v.swf&id=$1");
-        if (url.indexOf('player.youku.com') > -1) {
-          url = url.split('?')[0]
-        }
         return url;
     }
 
@@ -276,12 +284,12 @@
         conUrl = utils.unhtmlForUrl(conUrl);
 
         $G("preview").innerHTML = '<div class="previewMsg"><span>'+lang.urlError+'</span></div>'+
-        '<embed class="previewVideo" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"' +
+        '<iframe class="previewVideo"' +
             ' src="' + conUrl + '"' +
             ' width="' + 420  + '"' +
             ' height="' + 280  + '"' +
-            ' wmode="transparent" play="true" loop="false" menu="false" allowscriptaccess="never" allowfullscreen="true" >' +
-        '</embed>';
+            ' frameborder=0 allowfullscreen>' +
+        '</iframe>';
     }
 
 

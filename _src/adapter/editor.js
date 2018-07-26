@@ -322,7 +322,11 @@
                         var dialogName = 'insertimageDialog';
                         var html1 = '<span class="nobr-img-auto-width" onclick=$$._onImgAutoWidthClick()><span class="edui-clickable nobr-icon-edit '+(img.style.width=='100%'? 'nobr-icon-edit-mask' : '')+'"></span><span style="vertical-align: super;">'+(img.style.width=='100%'? '取消自适应' : '自适应屏幕宽度')+'</span></span>'
                             + '<span class="edui-clickable line"></span>'
-                        var html2 = '<hr style="margin:15px 5px;border-top: 1px solid #eee;"/>'
+                        var html2 = '<span class="edui-clickable line"></span>'
+                        + '<span onclick=$$._onImgShadowClick() class="edui-clickable edui-clickable5" title="添加阴影"></span>'
+                        + '<span onclick=$$._onImgBorderClick() class="edui-clickable edui-clickable6" title="添加边框"></span>'
+                        + '<span onclick=$$._onImgRadiusClick() class="edui-clickable edui-clickable7" title="变为圆形"></span>'
+                        + '<hr style="margin:15px 5px;border-top: 1px solid #eee;"/>'
                         + '<div><span class="nobr-left">宽度：</span><input type="text" onkeyup=$$._onImgWidthChange() class="nobr-input nobr-input-style nobr-img-width" value="'+img.width+'" autofocus />'
                         + '<span class="nobr-left" style="padding-left: 20px;">高度：</span><input type="text" onkeyup=$$._onImgHeightChange() class="nobr-input nobr-input-style nobr-img-height" value="'+img.height+'" autofocus /></div>'
                         + '<br/><div><span class="nobr-left">图片描述：</span><input type="text" style="width:158px" onkeyup=$$._onImgAltChange() class="nobr-input nobr-img-alt" value="'+img.getAttribute('alt')+'" autofocus /></div>'
@@ -372,10 +376,6 @@
                             + '<span onclick=$$._onImgSetFloat("left") class="edui-clickable edui-clickable2" title="居左对齐"></span>'
                             + '<span onclick=$$._onImgSetFloat("center") class="edui-clickable edui-clickable3" title="居中对齐"></span>'
                             + '<span onclick=$$._onImgSetFloat("right") class="edui-clickable edui-clickable4" title="居右对齐"></span>'
-                            + '<span class="edui-clickable line"></span>'
-                            + '<span onclick=$$._onImgShadowClick() class="edui-clickable edui-clickable5" title="添加阴影"></span>'
-                            + '<span onclick=$$._onImgBorderClick() class="edui-clickable edui-clickable6" title="添加边框"></span>'
-                            + '<span onclick=$$._onImgRadiusClick() class="edui-clickable edui-clickable7" title="变为圆形"></span>'
                             + html2
                           + '</div></nobr>';
 
