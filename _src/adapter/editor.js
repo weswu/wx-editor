@@ -221,29 +221,29 @@
                 },
                 // 图片 自适应 宽度
                 _onImgAutoWidthClick:function(){
-                    var tar=$("#"+this.id).find('.nobr-icon-edit');
+                    var tar=document.getElementsByClassName('nobr-icon-edit')[0]
                     if(this.anchorEl.style.width == '100%'){
                         this.anchorEl.style.width="auto";
-                        tar.removeClass('nobr-icon-edit-mask');
-                        $("#"+this.id).find('.nobr-icon-edit').next().html('自适应屏幕宽度')
+                        tar.className = 'edui-clickable nobr-icon-edit'
+                        tar.nextSibling.innerHTML = '自适应屏幕宽度'
                     }else{
                         this.anchorEl.style.width="100%";
                         this.anchorEl.style.height="auto";
-                        tar.addClass('nobr-icon-edit-mask');
-                        $("#"+this.id).find('.nobr-icon-edit').next().html('取消自适应')
+                        tar.className = 'edui-clickable nobr-icon-edit nobr-icon-edit-mask'
+                        tar.nextSibling.innerHTML = '取消自适应'
                     }
                 },
                 // 图片 宽度
                 _onImgWidthChange:function(){
-                    this.anchorEl.style.width=$('.nobr-img-width').val()+'px';
+                    this.anchorEl.style.width = document.getElementsByClassName('nobr-img-width')[0].value + 'px';
                 },
                 // 图片 高度
                 _onImgHeightChange:function(){
-                    this.anchorEl.style.height=$('.nobr-img-height').val()+'px';
+                    this.anchorEl.style.height= document.getElementsByClassName('nobr-img-height')[0].value + 'px';
                 },
                 // 图片 alt
                 _onImgAltChange:function(){
-                    this.anchorEl.alt=$('.nobr-img-alt').val();
+                    this.anchorEl.alt= document.getElementsByClassName('nobr-img-alt')[0].value;
                 },
                 _blank:function(){
                     $("<p><br/></p>").insertAfter(this.anchorEl);
