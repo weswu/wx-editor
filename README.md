@@ -3,7 +3,7 @@
 
 
 ### 截图
-![截图](https://github.com/weswu/wu-editor/raw/master/thems/default/images/demo.png)
+![截图](https://raw.githubusercontent.com/weswu/wx-editor/master/themes/default/images/demo.png)
 
 ### 代码
 #### 图片去_src
